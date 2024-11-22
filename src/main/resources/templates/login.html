@@ -1,32 +1,111 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Login</title>-->
-<!--    <link-->
-<!--            rel="stylesheet"-->
-<!--            href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"-->
-<!--    >-->
-<!--    <link-->
-<!--            rel="stylesheet"-->
-<!--            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"-->
-<!--            integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="-->
-<!--            crossorigin="anonymous"-->
-<!--            referrerpolicy="no-referrer"-->
-<!--    />-->
-<!--</head>-->
-<!--<body class="container">-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #0d1117; /* Preto com tom de azul escuro */
+            color: #f0f6fc; /* Branco suave */
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-<!--<h1 class="title is-1">Bem-vindo ao Sistema</h1>-->
+        .login-container {
+            background-color: #161b22; /* Fundo escuro */
+            color: #f0f6fc;
+            border: 1px solid #30363d; /* Cinza escuro */
+            border-radius: 12px;
+            padding: 30px;
+            width: 400px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
 
-<!--<h2 class="title">Acesse o sistema</h2>-->
+        .login-container h1 {
+            color: #58a6ff; /* Azul claro */
+            margin-bottom: 20px;
+        }
 
-<!--<a th:href="@{/oauth2/authorization/github}" class="button is-default is-medium">-->
-<!--    <span class="icon is-small">-->
-<!--        <i class="fab fa-github"></i>-->
-<!--    </span>-->
-<!--    <span>Acessar com GitHub</span>-->
-<!--</a>-->
+        .form-control {
+            background-color: #21262d; /* Fundo escuro mais claro */
+            color: #f0f6fc;
+            border: 1px solid #30363d; /* Borda */
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
 
-<!--</body>-->
-<!--</html>-->
+        .form-control:focus {
+            background-color: #30363d;
+            border-color: #58a6ff; /* Azul claro */
+            box-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
+            color: #ffffff;
+        }
+
+        .btn-primary {
+            background-color: #238636; /* Verde escuro */
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #2ea043; /* Verde mais claro */
+            transform: scale(1.1);
+        }
+
+        .alert {
+            background-color: #21262d; /* Fundo suave */
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .alert-danger {
+            color: #f85149; /* Vermelho claro */
+        }
+
+        .alert-success {
+            color: #2ea043; /* Verde claro */
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <h1>Login</h1>
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label for="username">Usuário</label>
+            <input type="text" id="username" name="username" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn-primary">Entrar</button>
+    </form>
+
+    <!-- Mensagens de Feedback -->
+    <div th:if="${param.error}" class="alert alert-danger">
+        Credenciais inválidas. Tente novamente.
+    </div>
+    <div th:if="${param.logout}" class="alert alert-success">
+        Você saiu com sucesso!
+    </div>
+</div>
+</body>
+</html>

@@ -21,6 +21,25 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
         }
 
+        .btn-logout {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #d9534f; /* Vermelho */
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-logout:hover {
+            background-color: #c9302c; /* Vermelho mais claro */
+            transform: scale(1.05);
+        }
+
         .form-container {
             background-color: #161b22; /* Fundo escuro */
             border: 1px solid #30363d; /* Borda cinza escuro */
@@ -110,6 +129,12 @@
     </style>
 </head>
 <body>
+<!-- Formulário para logout com suporte a CSRF -->
+<form th:action="@{/logout}" method="post" style="position: absolute; top: 20px; right: 20px;">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+    <button type="submit" class="btn-logout">Logout</button>
+</form>
+
 <div class="container mt-4">
     <h1>Usuários</h1>
 
